@@ -20,15 +20,15 @@
 (has-all-unique "")
 (has-all-unique "a")
 
-(defn add-or-false [num set]
+(defn add-or-false-atom [num set]
   (if (contains? @set num)
     false
     (swap! set conj num)))
 
-(defn unique? [num set]
+(defn unique?-atom [num set]
   (if (nil? num)
     true
-    (add-or-false num set)))
+    (add-or-false-atom num set)))
 
 ; This one isn't much better.
 ; Switched to seq from toCharArray, it's null safe.
@@ -45,7 +45,7 @@
         not-unique (atom true)]
     (do
       (doseq [num (seq str)]
-        (if-not (unique? num set)
+        (if-not (unique?-atom num set)
           (swap! not-unique (fn [n] false))))
       (if (true? @not-unique)
         true
@@ -59,11 +59,32 @@
     (loop [num (first chars)
            chs chars]
       (cond (nil? num) true
-            (unique? num seen) (recur (second chs) (rest chs))
+            (unique?-atom num seen) (recur (second chs) (rest chs))
             :else false))))
 
+
+; Best so far! Peel things apart.
+(defn unique? [char seen]
+  (if (contains? seen char)
+    false
+    (conj seen num)))
+
+; This is cool, it recurs on the function itself!
+(defn all-unique? [current chars seen]
+  (let [unique (unique? current seen)]
+    (cond (nil? current) true
+          (false? unique) false
+          unique (recur (second chars) (rest chars) unique))))
+
+(defn has-all-unique-alt-3 [str]
+  (let [chars (seq str)
+        current (first chars)
+        seen '()]
+    (all-unique? current chars seen)))
+
+
 (has-all-unique-alt-2 "abcde")
-(has-all-unique-alt-2 "abccde")
+(has-all-unique-alt-2 "abccddddeeeeee")
 (has-all-unique-alt-2 nil)
 (has-all-unique-alt-2 "")
 (has-all-unique-alt-2 "a")
