@@ -1,4 +1,4 @@
-package main.java.cracking.ch1_arrays_and_strings;
+package ch1_arrays_and_strings;
 
 public class Ch1_2 {
 
