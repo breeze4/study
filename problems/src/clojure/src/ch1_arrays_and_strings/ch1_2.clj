@@ -12,5 +12,3 @@
 ; the head of the return seq will reverse the word.
 ; (apply str (reduce conj [] "abc")) => "abc"
 ; Vectors add at the tail, so it just copies exactly
-
-; Reduce is interesting here. It's
