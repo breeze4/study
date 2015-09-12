@@ -1,5 +1,7 @@
 (ns problems.cracking.ch1-arrays-and-strings.ch1-1)
 
+; Check a string to see if it has all unique characters
+
 ; wow this one really sucks
 (defn has-all-unique [str]
   (if (nil? str)
@@ -76,15 +78,24 @@
           (false? unique) false
           unique (recur (second chars) (rest chars) unique))))
 
+; Got rid of the let, not sure if any better :)
+(defn all-unique?-2 [unique current chars seen]
+  (cond (nil? current) true
+        (false? unique) false
+        unique (recur (unique? current seen)
+                      (second chars)
+                      (rest chars)
+                      unique)))
+
 (defn has-all-unique-alt-3 [str]
   (let [chars (seq str)
         current (first chars)
         seen '()]
-    (all-unique? current chars seen)))
-
+    (all-unique?-2 (unique? current seen) current chars seen)))
 
 (has-all-unique-alt-2 "abcde")
 (has-all-unique-alt-2 "abccddddeeeeee")
+(has-all-unique-alt-2 "abcefghcddddeeeeee")
 (has-all-unique-alt-2 nil)
 (has-all-unique-alt-2 "")
 (has-all-unique-alt-2 "a")
