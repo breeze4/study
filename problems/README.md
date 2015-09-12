@@ -1,14 +1,6 @@
-# problems
+# Algorithm Study
 
-A Clojure library designed to ... well, that part is up to you.
+Sharpening the saw.
 
-## Usage
-
-FIXME
-
-## License
-
-Copyright © 2015 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Clojure and Java implementations of various problems.
+As an exercise in algorithms and to learn more about Clojure.
