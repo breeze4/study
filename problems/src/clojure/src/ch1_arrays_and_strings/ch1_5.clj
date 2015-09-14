@@ -26,11 +26,42 @@
       input
       (apply str output))))
 
-(defn compress [input]
+(defn compress-old [input]
   (if (or (nil? input)
           (<= (count input) 2))
     input
-    (compress-string input)))
+    (let [compressed (compress-string-2 input)]
+      (if (>= (count compressed) (count input))
+        input
+        (apply str compressed)))))
+
+(defn- compress-string-2 [current
+                          currentCount
+                          in
+                          out]
+  (cond
+    ; If the input is empty, just add the current tracker and count to the output and return it
+    (empty? in)
+    (into out [current currentCount])
+    ; If the input is the same as the tracker, increment the counter and continue
+    (= current (first in))
+    (recur current (inc currentCount) (rest in) out)
+    ; If the input is different from the tracker, add the current values to the output
+    ; and reset the tracker and count
+    (not= current (first in))
+    (recur (first in) 1 (rest in) (into out [current currentCount]))))
+
+(defn compress [input]
+  (if (or (nil? input)
+          (<= (count input) 2))
+    ; Check to see if the input is worth compressing
+    input
+    (let [compressed (compress-string-2 (first input) 0 (seq input) [])
+          ; Check to see if the output was an improvement
+          use-compressed? (>= (count compressed) (count input))]
+      (if use-compressed?
+        input
+        (apply str compressed)))))
 
 (compress "aabbbcc")
 (compress "abc")
