@@ -35,6 +35,8 @@
         input
         (apply str compressed)))))
 
+(ffirst )
+
 (defn- compress-string-2 [current
                           currentCount
                           in
