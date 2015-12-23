@@ -3,7 +3,7 @@ package uva;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Template {
+class Template {
 
     static String ReadLn(int maxLg)  // utility function to read from stdin
     {
