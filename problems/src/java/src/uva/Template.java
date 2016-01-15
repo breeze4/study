@@ -1,8 +1,12 @@
 package uva;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
+// Name class as Main
+// default package
 class Template {
 
     static String ReadLn(int maxLg)  // utility function to read from stdin
@@ -34,9 +38,9 @@ class Template {
     void Begin() {
         String input;
         StringTokenizer idata;
-        int a, b, min, max, num, n, cycle, cyclemax;
 
         while ((input = Template.ReadLn(255)) != null) {
+            if (input.equals("")) break;
             idata = new StringTokenizer(input);
             // program goes here
 

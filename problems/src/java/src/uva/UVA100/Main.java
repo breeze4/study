@@ -1,9 +1,7 @@
-package uva;
-
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-class UVA100 {
+public class Main {
     static String ReadLn (int maxLg)  // utility function to read from stdin
     {
         byte lin[] = new byte [maxLg];
@@ -30,7 +28,7 @@ class UVA100 {
 
     public static void main (String args[])  // entry point from OS
     {
-        UVA100 myWork = new UVA100();  // create a dinamic instance
+        Main myWork = new Main();  // create a dinamic instance
         myWork.Begin();            // the true entry point
     }
 
@@ -40,7 +38,7 @@ class UVA100 {
         StringTokenizer idata;
         int a, b, min, max, num, n, cycle, cyclemax;
 
-        while ((input = UVA100.ReadLn (255)) != null)
+        while ((input = Main.ReadLn (255)) != null)
         {
             idata = new StringTokenizer (input);
             a = Integer.parseInt (idata.nextToken());
